@@ -18,7 +18,7 @@ afterEach(() => {
 });
 
 describe('<Search /> button', () => {
-  it('shuold enabled after text is typed', () => {
+  it('should enabled after text is typed', () => {
     search.find('input').simulate('change', { target: { value: 'abcdefghijk' } });
   
     expect(search.find('button').prop('disabled')).toBe(false);

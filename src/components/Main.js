@@ -7,7 +7,7 @@ import getImages from '../api/Images';
 export default function Main() {
   const [images, setImages] = useState([]);
 
-  function handleClick (src) {
+  function handleSearch (src) {
     getImages(src)
       .then(({ hits }) => setImages(
         hits.map(({ largeImageURL, id }) => ({ url: largeImageURL, key: id }))
@@ -18,7 +18,7 @@ export default function Main() {
     <>
       <Search
         setImages={ setImages }
-        onClick={ handleClick }/>
+        onSearch={ handleSearch }/>
 
         { images.length
         ? <ImagesList images={ images }/> 

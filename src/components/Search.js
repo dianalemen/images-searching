@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Input, Button, SvgIcon } from '@material-ui/core'
 
-export default function Search({ onClick, setImages }) {
+export default function Search({ onSearch, setImages }) {
   const [searchedStr, setSearchedStr] = useState('');
 
   const handleChange = (str) => {
     if (!str) setImages([]);
     const modifiedValue = str.replace(' ', '+');
     setSearchedStr(modifiedValue);
+  }
+
+  const handleKeyDown = ({ key }) => {
+    if (key === "Enter" && searchedStr) onSearch(searchedStr);
   }
 
   return(
@@ -17,11 +21,12 @@ export default function Search({ onClick, setImages }) {
           type="search"
           placeholder="What are you looking for?"
           onChange={ (e) => handleChange(e.target.value) }
+          onKeyDown={ (e) => handleKeyDown(e) }
           color="secondary"
           fullWidth
         />
         <Button
-          onClick={ () => onClick(searchedStr) }
+          onClick={ () => onSearch(searchedStr) }
           disabled={ !searchedStr }
           color="secondary"
         >
